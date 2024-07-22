@@ -6,50 +6,98 @@
     <title>Robux Generator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
             text-align: center;
-            padding: 50px;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
             background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
         }
         h1 {
-            color: #2c3e50;
+            color: #34495e;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+        p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        input {
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            padding: 10px;
+            width: calc(100% - 24px);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #27ae60;
+            outline: none;
+        }
+        button {
+            background-color: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2ecc71;
+            transform: translateY(-2px);
+        }
+        button:active {
+            background-color: #1e8449;
+            transform: translateY(1px);
         }
         .hidden {
             display: none;
         }
         .loading {
             color: #e67e22;
+            font-size: 1.2rem;
             margin-bottom: 20px;
         }
         .progress-bar {
             width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 5px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
             overflow: hidden;
             margin-bottom: 20px;
+            height: 20px;
+            position: relative;
         }
         .progress-bar-inner {
             width: 0;
-            height: 20px;
+            height: 100%;
             background-color: #27ae60;
-            transition: width 0.5s;
+            transition: width 0.5s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
-        .unclickable {
-            pointer-events: none;
-            background-color: #e74c3c;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: not-allowed;
+        .result h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .result p {
+            color: #95a5a6;
         }
     </style>
 </head>
@@ -67,7 +115,7 @@
             </div>
         </div>
 
-        <div id="result" class="hidden">
+        <div id="result" class="hidden result">
             <h2>Robux Generation Complete!</h2>
             <p>Click the button below to claim your Robux:</p>
             <button class="unclickable">Claim Robux</button>
