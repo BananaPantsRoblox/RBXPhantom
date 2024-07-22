@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robux Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .hidden {
+            display: none;
+        }
+        .loading {
+            color: #e67e22;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .progress-bar-inner {
+            width: 0;
+            height: 20px;
+            background-color: #27ae60;
+            transition: width 0.5s;
+        }
+        .unclickable {
+            pointer-events: none;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Robux Generator</h1>
+        <p>Enter your username to generate Robux:</p>
+        <input type="text" id="username" placeholder="Enter your Roblox username">
+        <button id="startBtn" onclick="startGeneration()">Start Generation</button>
+
+        <div id="loading" class="hidden">
+            <p class="loading">Generating Robux... Please wait...</p>
+            <div class="progress-bar">
+                <div class="progress-bar-inner" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div id="result" class="hidden">
+            <h2>Robux Generation Complete!</h2>
+            <p>Click the button below to claim your Robux:</p>
+            <button class="unclickable">Claim Robux</button>
+        </div>
+    </div>
+
+    <script>
+        function startGeneration() {
+            document.getElementById('startBtn').classList.add('hidden');
+            document.getElementById('loading').classList.remove('hidden');
+            let progressBar = document.getElementById('progressBar');
+            let width = 0;
+            let interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    showResult();
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                }
+            }, 30); // Simulate progress
+        }
+
+        function showResult() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
