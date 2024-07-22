@@ -53,6 +53,18 @@
             outline: none;
             box-shadow: 0 0 0 2px rgba(39, 174, 96, 0.2);
         }
+        select {
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            padding: 15px;
+            width: calc(100% - 30px);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            background: #fff url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj4KPHBhdGggZD0iTTUgM2EwLjUgMCAwIDAgMS4wMiAxLjA0TDQgNGEyLjUgMi41IDAgMCAxIDIuNSA0bDExLTExIDExLTExbDIuNS0yLjUgMy41LTMuNCIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtbGluZS1hcmlhPSJyb3VuZCIvPjwvcGF0aD4KPC9zdmc+');
+            background-position: right 10px center;
+            background-repeat: no-repeat;
+            background-size: 1em auto;
+        }
         button {
             background-color: #27ae60;
             color: #fff;
@@ -181,8 +193,26 @@
     <div class="container">
         <div class="background-overlay"></div>
         <h1><i class="fas fa-gem"></i> Robux Generator</h1>
-        <p>Enter your username to start generating Robux:</p>
+        <p>Enter your username and select the amount and platform to start generating Robux:</p>
         <input type="text" id="username" placeholder="Enter your Roblox username">
+        
+        <!-- Amount Selection -->
+        <select id="amount">
+            <option value="" disabled selected>Select Amount</option>
+            <option value="100">100 Robux</option>
+            <option value="500">500 Robux</option>
+            <option value="1000">1000 Robux</option>
+            <option value="5000">5000 Robux</option>
+        </select>
+        
+        <!-- Platform Selection -->
+        <select id="platform">
+            <option value="" disabled selected>Select Platform</option>
+            <option value="pc">PC</option>
+            <option value="mobile">Mobile</option>
+            <option value="console">Console</option>
+        </select>
+        
         <button id="startBtn" onclick="startGeneration()">Start Generation</button>
 
         <div id="loading" class="hidden">
@@ -209,8 +239,11 @@
 
     <script>
         function startGeneration() {
+            // Hide start button and show loading animation
             document.getElementById('startBtn').classList.add('hidden');
             document.getElementById('loading').classList.remove('hidden');
+
+            // Update progress bar and log
             let progressBar = document.getElementById('progressBar');
             let progressLog = document.getElementById('progressLog');
             let width = 0;
