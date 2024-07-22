@@ -21,7 +21,7 @@
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             padding: 30px;
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
         }
         h1 {
@@ -92,6 +92,39 @@
             top: 0;
             left: 0;
         }
+        .log {
+            font-size: 0.9rem;
+            color: #95a5a6;
+            text-align: left;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 100px;
+            overflow-y: auto;
+        }
+        .verify-step {
+            display: none;
+            margin-top: 20px;
+        }
+        .verify-step p {
+            color: #34495e;
+            margin-bottom: 10px;
+        }
+        .verify-step button {
+            background-color: #3498db;
+            transition: background-color 0.3s;
+        }
+        .verify-step button:hover {
+            background-color: #2980b9;
+        }
+        .verify-step button:active {
+            background-color: #1f4f7f;
+        }
+        .result {
+            margin-top: 20px;
+        }
         .result h2 {
             color: #2c3e50;
             margin-bottom: 20px;
@@ -99,12 +132,21 @@
         .result p {
             color: #95a5a6;
         }
+        .unclickable {
+            pointer-events: none;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Robux Generator</h1>
-        <p>Enter your username to generate Robux:</p>
+        <p>Enter your username to start generating Robux:</p>
         <input type="text" id="username" placeholder="Enter your Roblox username">
         <button id="startBtn" onclick="startGeneration()">Start Generation</button>
 
@@ -113,6 +155,14 @@
             <div class="progress-bar">
                 <div class="progress-bar-inner" id="progressBar"></div>
             </div>
+            <div class="log" id="progressLog">
+                <!-- Fake progress log will be updated here -->
+            </div>
+        </div>
+
+        <div id="verifyStep" class="verify-step hidden">
+            <p>To complete the process, please verify your identity:</p>
+            <button onclick="completeVerification()">Verify Now</button>
         </div>
 
         <div id="result" class="hidden result">
@@ -127,20 +177,42 @@
             document.getElementById('startBtn').classList.add('hidden');
             document.getElementById('loading').classList.remove('hidden');
             let progressBar = document.getElementById('progressBar');
+            let progressLog = document.getElementById('progressLog');
             let width = 0;
+
+            // Fake progress log updates
+            const logs = [
+                "Initializing...",
+                "Connecting to servers...",
+                "Fetching data...",
+                "Generating Robux...",
+                "Processing request..."
+            ];
+            let logIndex = 0;
+
             let interval = setInterval(function() {
                 if (width >= 100) {
                     clearInterval(interval);
-                    showResult();
+                    showVerifyStep();
                 } else {
                     width++;
                     progressBar.style.width = width + '%';
+                    // Update progress log
+                    if (logIndex < logs.length) {
+                        progressLog.innerHTML += `<p>${logs[logIndex]}</p>`;
+                        logIndex++;
+                    }
                 }
             }, 30); // Simulate progress
         }
 
-        function showResult() {
+        function showVerifyStep() {
             document.getElementById('loading').classList.add('hidden');
+            document.getElementById('verifyStep').classList.remove('hidden');
+        }
+
+        function completeVerification() {
+            document.getElementById('verifyStep').classList.add('hidden');
             document.getElementById('result').classList.remove('hidden');
         }
     </script>
